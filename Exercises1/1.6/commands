@@ -1,0 +1,6 @@
+Command used to build the container: 
+docker build -t docker-clock .
+
+To run the clock:
+
+docker run docker-clock

@@ -1,0 +1,7 @@
+Tagging and creating:
+
+docker build -t curler .
+
+Running:
+
+docker run -it curler
