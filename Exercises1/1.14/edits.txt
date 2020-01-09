@@ -1,0 +1,3 @@
+I changed the Gemfile to the one in this folder. Only edit was that Gemfile now requires ruby 
+version 2.6.5. This is because after searching, I couldn't find a way to change the version, at least
+with my skills. 
