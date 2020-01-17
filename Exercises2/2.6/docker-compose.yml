@@ -1,0 +1,37 @@
+version: '3.5'  
+
+services: 
+    frontend: 
+      image: frontend-example 
+      ports: 
+        - 5000:5000
+
+    backend:
+      image: backend-example
+      ports:
+        - 8000:8000
+      environment:
+        - REDIS=redis
+        - DB_USERNAME=postgres
+        - DB_PASSWORD=test
+        - DB_HOST=db
+      depends_on:
+        - db
+    redis:
+      image: redis:5
+
+    db:
+      image: postgres
+      restart: unless-stopped
+      environment:
+        - POSTGRES_PASSWORD=test
+      volumes:
+        - database:/var/lib/postgresql/data
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+    
+volumes:
+  database:

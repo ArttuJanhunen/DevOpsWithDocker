@@ -1,0 +1,43 @@
+version: '3.5'  
+
+services: 
+    frontend: 
+      image: frontend-example 
+      ports: 
+        - 5000:5000
+      container_name: frontti
+    backend:
+      image: backend-example
+      ports:
+        - 8000:8000
+      environment:
+        - REDIS=redis
+        - DB_USERNAME=postgres
+        - DB_PASSWORD=test
+        - DB_HOST=db
+      depends_on:
+        - db
+      container_name: backki
+    redis:
+      image: redis:5
+
+    db:
+      image: postgres
+      restart: unless-stopped
+      environment:
+        - POSTGRES_PASSWORD=test
+      volumes:
+        - database:/var/lib/postgresql/data
+    nginx:
+      image: nginx
+      ports:
+        - 80:80
+      environment:
+        - NGINX_PORT=80
+      volumes: 
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      container_name: proxy
+ 
+volumes:
+  database:
+
